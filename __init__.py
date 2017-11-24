@@ -33,8 +33,8 @@ class AsteriskCliSkill(MycroftSkill):
     def initialize(self):
         self.load_data_files(dirname(__file__))
 
-        h=self.settings.get('host')
-        p=self.settings.get('port')
+        h=self.settings.get("host","127.0.0.1")
+        p=self.settings.get("port","5038")
         self.client = AMIClient(address=h,port=p)
         future = client.login(username=self.settings.get('username'),secret=self.settings.get('password'))
         if future.response.is_error():
