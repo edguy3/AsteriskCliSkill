@@ -33,7 +33,9 @@ class AsteriskCliSkill(MycroftSkill):
     def initialize(self):
         self.load_data_files(dirname(__file__))
 
-        self.client = AMIClient(address=self.settings.get('host'),port=self.settings.get('port'))
+        h=self.settings.get('host')
+        p=self.settings.get('port')
+        self.client = AMIClient(address=h,port=p)
         future = client.login(username=self.settings.get('username'),secret=self.settings.get('password'))
         if future.response.is_error():
             raise Exception(str(future.response))
