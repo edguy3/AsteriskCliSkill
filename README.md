@@ -36,10 +36,6 @@ Installing
     sudo service ami_cli start
     # note - I used update-rc.d to install
 
-    git clone https://github.com/jcasoft/GoogleCalendarSkill.git
-    cd GoogleCalendarSkill
-    sudo pip install -r requirements.txt
-
 Note: This is my first attempt at interacting with mycroft from an external system,
 so, feel free to suggest better ways to accomplish this goal. 
 
