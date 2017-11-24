@@ -33,8 +33,8 @@ class AsteriskCliSkill(MycroftSkill):
     def initialize(self):
         self.load_data_files(dirname(__file__))
 
-        self.client = AMIClient(address=self.settings['host'],port=self.settings['port'])
-        future = client.login(username=self.settings['username'],secret=self.settings['password'])
+        self.client = AMIClient(address=self.settings.get('host'),port=self.settings.get('port'))
+        future = client.login(username=self.settings.get('username'),secret=self.settings.get('password'))
         if future.response.is_error():
             raise Exception(str(future.response))
         AutoReconnect(self.client)
