@@ -35,6 +35,9 @@ class AsteriskCliSkill(MycroftSkill):
 
         h=self.settings.get("host","127.0.0.1")
         p=self.settings.get("port",5038)
+        LOGGER.debug(h)
+        LOGGER.debug(p)
+        p=5038
         self.client = AMIClient(address=h,port=p)
         future = self.client.login(username=self.settings.get('username'),secret=self.settings.get('password'))
         if future.response.is_error():
