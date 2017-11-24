@@ -1,5 +1,5 @@
-**MYCROFT/ Asterisk Announce CALLER ID Name **
-===================
+# MYCROFT/ Asterisk Announce CALLER ID Name 
+=========================================
 
 For Mycroft
 ----------
@@ -8,11 +8,13 @@ A daemon to use with Mycroft which vocalizes a caller's name as
 calls come into an Asterisk PBX.
 
 
+## Current state
+
 
 Prerequistes
 ------------
-    * mycroft
-    * asterisk with AMI interface configured 
+    - mycroft
+    - asterisk with AMI interface configured 
 
 
 Installing

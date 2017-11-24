@@ -1,0 +1,38 @@
+{
+    "name": "AsteriskCliSkill",
+    "skillMetadata": {
+        "sections": [
+            {
+                "name": "AMI",
+                "fields": [
+                    {
+                        "name": "host",
+                        "type": "text",
+                        "label": "ip",
+                        "value": "127.0.0.1",
+                        "placeholder":"Enter ip or domain of asterisk server"
+                    },
+                    {
+                        "name": "port",
+                        "type": "number",
+                        "label": "port",
+                        "placeholder":"Enter manager port on asterisk server"
+                        "value": "5038"
+                    },
+                    {
+                        "name": "username",
+                        "type": "text",
+                        "label": "Username",
+                        "value": ""
+                    },
+                    {
+                        "name": "password",
+                        "type": "password",
+                        "label": "Password",
+                        "value": ""
+                    }
+                ]
+            }
+        ]
+    }
+}
