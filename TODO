@@ -1,5 +1,0 @@
-1) init script expects python program to be in /home/pi/ami_cli/ami_cli.py ,  It should be moved to /usr/local.bin or similar
-2) settings should be taken from a file in the /etc (or similar) configuration space. 
-3) remove all debug code, or implement --verbose mode.
-
-*** changed to skill ; need to update TODO 

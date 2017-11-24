@@ -1,46 +1,47 @@
-# MYCROFT/ Asterisk Announce CALLER ID Name 
-=========================================
+# AsteriskCliSkill 
 
-For Mycroft
-----------
-
-A daemon to use with Mycroft which vocalizes a caller's name as 
-calls come into an Asterisk PBX.
+This skill provides a connection to an asterisk manager interface such 
+that incimong caller id names will be vocalized by mycroft. 
 
 
 ## Current state
 
+Caller ID annoucement is working as Mycroft Skill.
 
-Prerequistes
-------------
+
+## Prerequistes
+
     - mycroft
     - asterisk with AMI interface configured 
 
-
-Installing
-----------
+## Installing
 
     ssh pi@<IP>
+    msm install https://github.com/edguy3/AsteriskCliSkill.git
 
-    git clone https://github.com/edguy3/ami_cli.git
-    cd ami_cli
+    in /etc/asterisk/manager.d/pi.conf 
+    ; Each user has a section labeled with the username
+    ; so this is the section for the user named "pi" which must match filename
+    [pi]
+    secret = superSecret                ; change this item. 
+    deny=0.0.0.0/0.0.0.0
+    permit=192.168.1.0/255.255.255.0    ; change this item.
+    read = system,call,log,verbose,command,agent,user,originate
+    write = log,verbose
+    ; 
+    
+    Visit https://home.mycroft.ai/#/skill to update your settings. 
 
-    # install python dependencies
-    pip install -r requirements.pip
 
-    # update your personal configuration
-    cp settings.template settings.py
-    vi settings.py   # change as needed
 
-    # install the daemon
-    sudo cp ami_cli.sh  /etc/init.d/ami_cli
-    sudo insserv -v  /etc/init.d/ami_cli
-    sudo service ami_cli start
-    # note - I used update-rc.d to install
+## TODO
 
-Note: This is my first attempt at interacting with mycroft from an external system,
-so, feel free to suggest better ways to accomplish this goal. 
+    - add intent to replay last caller's name
+    - add intent to initiate calls. 
+    - add intent to check if someone else is on call
+    - add voicemail interface 
+    - solicit further comments on implementation and functions. 
 
-**Enjoy !**
 
-/* Copyright (C) 2017 Ed Guy <edguy@eguy.org> */
+
+**Enjoy !**  Copyright (C) 2017 Ed Guy <edguy@eguy.org> - See included open license

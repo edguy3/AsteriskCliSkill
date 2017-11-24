@@ -28,22 +28,18 @@ class AsteriskCliSkill(MycroftSkill):
     # constructor calls MycroftSkill's constructor to build data structures. 
     def __init__(self):
         super(AsteriskCliSkill, self).__init__(name="AsteriskCliSkill")
+        self.loggedin=false
 
     # runtime initialize instance for use. 
     def initialize(self):
         self.load_data_files(dirname(__file__))
 
-        h=self.settings.get("host","127.0.0.1")
-        p=self.settings.get("port",5038)
-        LOGGER.debug(h)
-        LOGGER.debug(p)
-        p=5038
-        self.client = AMIClient(address=h,port=p)
+        self.client = AMIClient(address=self.settings.get("host","127.0.0.1"),port=p=self.settings.get("port",5038))
         future = self.client.login(username=self.settings.get('username'),secret=self.settings.get('password'))
         if future.response.is_error():
-            raise Exception(str(future.response))
+            LOGGER.debug(str(future.response))
+            return
         AutoReconnect(self.client)
-        LOGGER.debug("AsteriskCliSkill Started")
             
         self.client.add_event_listener(EventListener(on_event=handle_cli, white_list='Newstate', ChannelStateDesc='Ringing'))
         LOGGER.debug("AsteriskCliSkill Listening")
