@@ -16,8 +16,8 @@
                         "name": "port",
                         "type": "number",
                         "label": "port",
-                        "placeholder":"Enter manager port on asterisk server"
-                        "value": "5038"
+                        "value": "5038",
+                        "placeholder":"Enter asterisk manager port"
                     },
                     {
                         "name": "username",
