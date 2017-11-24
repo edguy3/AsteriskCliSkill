@@ -2,3 +2,4 @@
 2) settings should be taken from a file in the /etc (or similar) configuration space. 
 3) remove all debug code, or implement --verbose mode.
 
+*** changed to skill ; need to update TODO 
