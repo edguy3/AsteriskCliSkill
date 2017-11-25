@@ -2,16 +2,7 @@
 
 # Copyright (C) 2017 Ed Guy <edguy@eguy.org> 
 
-from websocket import create_connection, WebSocket
-import ssl
-import sys
-import fileinput
-import os
-import time
-
 from asterisk.ami import AMIClient, EventListener, AutoReconnect
-from pprint import pprint
-
 from os.path import dirname
 
 from adapt.intent import IntentBuilder
@@ -28,7 +19,7 @@ class AsteriskCliSkill(MycroftSkill):
     def __init__(self):
         super(AsteriskCliSkill, self).__init__(name="AsteriskCliSkill")
         self.loggedin=False
-        self.last="No One"
+        self.lastcaller="No One"
 
     # runtime initialize instance for use. 
     def initialize(self):
@@ -45,17 +36,23 @@ class AsteriskCliSkill(MycroftSkill):
             LOGGER.debug("AsteriskCliSkill login fail: "+str(future.response))
             return
         self.loggedin=True
-        self.autoconnect=AutoReconnect(self.client)
+        #self.autoconnect=AutoReconnect(self.client)
             
-        self.client.add_event_listener(EventListener(on_event=self.handle_cli, white_list='Newstate', ChannelStateDesc='Ringing'))
-        LOGGER.debug("AsteriskCliSkill Listening host: "+h+" port set to: "+str(p))
-
         # what was that last call? 
-        #        last_call_intent = IntentBuilder("LastCallIntent").\
-        #            require("LastCallKeyword").build()
-        #        self.register_intent(last_call_intent, self.handle_last_call_intent)
+        #last_call_intent = IntentBuilder("LastCallIntent").\
+        #	require("WhoLastCaller").build()
+        #self.register_intent(last_call_intent, self.handle_last_call_intent)
+
+
+        self.client.add_event_listener(EventListener(on_event=self.handle_cli, white_list='Newstate', ChannelStateDesc='Ringing'))
+        LOGGER.info("AsteriskCliSkill Listening host: "+h+" port set to: "+str(p))
+
         
-        # other calling functions. 
+    # other calling functions. 
+
+    def handle_last_call_intent(self, message):
+        LOGGER.debug("AsteriskCliSkill last_caller invoked")
+	self.speak_dialog("last.caller", {'name': self.lastcaller})
 
     def handle_cli(self, message):
         LOGGER.debug("AsteriskCliSkill CLI invoked")
@@ -72,12 +69,11 @@ class AsteriskCliSkill(MycroftSkill):
                 LOGGER.debug("AsteriskCliSkill Exception handled 1")
 	if self.loggedin:
 	    try:
-                self.client.logoff(self.finalstop)
+                self.client.disconnect()
             except Exception:
                 LOGGER.debug("AsteriskCliSkill Exception handled 2")
 		pass
-    def finalstop(self):
-	del self.client
+        LOGGER.debug("AsteriskCliSkill stopped!!")
 
 
 def create_skill():

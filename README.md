@@ -1,7 +1,9 @@
 # AsteriskCliSkill 
 
 This skill provides a connection to an asterisk manager interface such 
-that incimong caller id names will be vocalized by mycroft. 
+that incoming caller id names will be vocalized by mycroft. 
+
+Can also as "Who was the last caller" or "who is calling" to review the previous caller. 
 
 
 ## Current state
@@ -21,7 +23,7 @@ Caller ID annoucement is working as Mycroft Skill.
 
     in /etc/asterisk/manager.d/pi.conf 
     ; Each user has a section labeled with the username
-    ; so this is the section for the user named "pi" which must match filename
+    ; so this is the section for the user named "pi" which should  match filename
     [pi]
     secret = superSecret                ; change this item. 
     deny=0.0.0.0/0.0.0.0
@@ -41,6 +43,8 @@ Caller ID annoucement is working as Mycroft Skill.
     - add intent to check if someone else is on call
     - add voicemail interface 
     - solicit further comments on implementation and functions. 
+
+    - mycroft.skills.main:_load_or_reload_skill:288 - WARNING - After shutdown of AsteriskCliSkill there are still 4 references remaining. The skill won't be cleaned from memory.
 
 
 
