@@ -45,4 +45,4 @@ Caller ID annoucement is working as Mycroft Skill.
 
 
 **Enjoy !**  Copyright (C) 2017 Ed Guy <edguy@eguy.org> - See included Apache 2.0 License
-# Copyright (C) 2017 Ed Guy <edguy@eguy.org> 
+
